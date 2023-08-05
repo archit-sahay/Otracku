@@ -20,6 +20,7 @@ but.click()
 # lol=driver.find_elements(By.CSS_SELECTOR, "a .show-title-bar")
 anime=driver.find_elements(By.CLASS_NAME, "description")
 
+
 name=driver.find_elements(By.CSS_SELECTOR, "div.date")
 links=driver.find_elements(By.CSS_SELECTOR,"img.image")
 
@@ -29,6 +30,7 @@ title=driver.find_elements(By.CLASS_NAME, "title")
 ts=[]
 all=[]
 lin=[]
+
 titl=[]
 
 for ded in anime:
@@ -49,5 +51,6 @@ for x in title:
 print(all)
 print(ts)
 print(lin)
+
 print(titl)
 driver.quit()
