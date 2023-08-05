@@ -19,22 +19,31 @@ but.click()
 # today=driver.find_elements(By.ID, "active-day")
 # lol=driver.find_elements(By.CSS_SELECTOR, "a .show-title-bar")
 anime=driver.find_elements(By.CLASS_NAME, "description")
+
+
 name=driver.find_elements(By.CSS_SELECTOR, "div.date")
 links=driver.find_elements(By.CSS_SELECTOR,"img.image")
 
+title=driver.find_elements(By.CLASS_NAME, "title")
 
 # time=today[0].find_elements(By.CSS_SELECTOR, "h3 .show-air-time")
 ts=[]
 all=[]
 lin=[]
 
+titl=[]
+
 for ded in anime:
 	all.append(str(ded.text))
+
 for x in name:
 	ts.append(str(x.text))
 
 for x in links:
 	lin.append(str(x.get_attribute('src')))
+
+for x in title:
+	titl.append(str(x.text))
 
 # for x in range(len(time)):
 #     if anime[x].text != "":
@@ -42,4 +51,6 @@ for x in links:
 print(all)
 print(ts)
 print(lin)
+
+print(titl)
 driver.quit()
