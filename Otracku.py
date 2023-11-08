@@ -1,19 +1,19 @@
+#!/usr/bin/python -tt
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver import ChromeOptions
 import os
 import discord
 import time
-import asyncio
 from datetime import datetime
 from pytz import timezone
 from dotenv import load_dotenv
 from discord.ui import Select,View
 from discord.ext import commands
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver import ChromeOptions
+import asyncio
 load_dotenv()
-
 
 #The function tff takes a string in 12 hour format and converts into 24 hour format string
 #10:30 PM to 22:30 in string format
@@ -82,7 +82,7 @@ class PaginationView(discord.ui.View):
         self.curp=len(self.data)-1
         await self.update_message(self.data[self.curp])
 
-TOKEN = os.getenv(token)
+TOKEN = os.getenv(tOkEn)
 intents = discord.Intents()
 intents.emojis = True
 intents.messages = True
@@ -119,14 +119,15 @@ async def info(ctx):
 @client.command()
 async def setr(ctx,*,ded):
     url="https://animeschedule.net"
-    chrome_driver_path="C:\Program Files (x86)\chromedriver.exe"
-    options=webdriver.ChromeOptions()
+    driver_path="C:\Program Files (x86)\msedgeedriver.exe"
+    options=webdriver.EdgeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("disable-gpu")
-    service=Service(executable_path=chrome_driver_path)
-    driver=webdriver.Chrome(service=service,options=options)
+    service=Service(executable_path=driver_path)
+    driver=webdriver.Edge(service=service,options=options)
     driver.get(url)
+    time.sleep(7)
     today=driver.find_elements(By.ID, "active-day")
     lol=driver.find_elements(By.CSS_SELECTOR, "a .show-title-bar")
     anime=today[0].find_elements(By.CSS_SELECTOR, "a .show-title-bar")
@@ -162,12 +163,12 @@ async def setr(ctx,*,ded):
                 await asyncio.sleep(604800)
             else:
                 await asyncio.sleep(86400)
-            options=webdriver.ChromeOptions()
+            options=webdriver.EdgeOptions()
             options.add_argument('headless')
             options.add_argument('window-size=1920x1080')
             options.add_argument("disable-gpu")
             service=Service(executable_path=chrome_driver_path)
-            driver=webdriver.Chrome(service=service,options=options)
+            driver=webdriver.Edge(service=service,options=options)
             driver.get(url)
             today=driver.find_elements(By.ID, "active-day")
             lol=driver.find_elements(By.CSS_SELECTOR, "a .show-title-bar")
@@ -191,17 +192,16 @@ async def setr(ctx,*,ded):
 @client.command()
 async def anisyn(ctx,*,ded):
     url=f'https://anilist.co/search/anime?search={ded}'
-    chrome_driver_path="C:\Program Files (x86)\chromedriver.exe"
+    driver_path="C:\Program Files (x86)\msedgedriver.exe"
 
-    options=webdriver.ChromeOptions()
+    options=webdriver.EdgeOptions()
     # options.add_argument('headless')
     # options.add_argument('window-size=1920x1080')
     # options.add_argument("disable-gpu")
-    service=Service(executable_path=chrome_driver_path)
-    driver=webdriver.Chrome(service=service)#,options=options)
-
+    service=Service(executable_path=driver_path)
+    driver=webdriver.Edge(service=service)#,options=options)
     driver.get(url)
-    time.sleep(7)
+    time.sleep(9)
     but=driver.find_element(By.XPATH, '//*[@id="app"]/div[3]/div/div/div[4]/div[2]/div[2]/div[2]')
     but.click()
     anime=driver.find_elements(By.CLASS_NAME, "description")
@@ -231,17 +231,17 @@ async def anisyn(ctx,*,ded):
 @client.command()
 async def mansyn(ctx,*,ded):
     url=f'https://anilist.co/search/manga?search={ded}'
-    chrome_driver_path="C:\Program Files (x86)\chromedriver.exe"
+    driver_path="C:\Program Files (x86)\msedgedriver.exe"
 
-    options=webdriver.ChromeOptions()
+    options=webdriver.EdgeOptions()
     # options.add_argument('headless')
     # options.add_argument('window-size=1920x1080')
     # options.add_argument("disable-gpu")
-    service=Service(executable_path=chrome_driver_path)
-    driver=webdriver.Chrome(service=service)#,options=options)
+    service=Service(executable_path=driver_path)
+    driver=webdriver.Edge(service=service)#,options=options)
 
     driver.get(url)
-    time.sleep(7)
+    time.sleep(9)
     but=driver.find_element(By.XPATH, '//*[@id="app"]/div[3]/div/div/div[4]/div[2]/div[2]/div[2]')
     but.click()
     anime=driver.find_elements(By.CLASS_NAME, "description")
@@ -266,4 +266,4 @@ async def mansyn(ctx,*,ded):
     pv.data=embeds
     await pv.send(ctx)
 
-client.run(token)
+client.run(ToKeN)
